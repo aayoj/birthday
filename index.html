@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aayoj Project for Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            background: linear-gradient(45deg, #ff6600, #ff3366);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            color: white;
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            cursor: url('https://www.example.com/heart-cursor.png'), auto; /* Custom Heart Cursor */
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Hearts */
+        .hearts {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .heart {
+            font-size: 2rem;
+            color: #ff3366;
+            animation: floatUp 6s infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
+        /* Rotating Cake with Candle */
+        .pulseCake {
+            font-size: 50px;
+            animation: pulse 2s infinite, rotateCake 5s linear infinite;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes rotateCake {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Sunset Background Animation */
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            margin: 20px;
+        }
+
+        .glowBtn {
+            background-color: #ff3366;
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px 5px #ff3366;
+            margin-top: 20px;
+        }
+
+        .glowBtn:hover {
+            box-shadow: 0 0 25px 5px #ff3366;
+            transform: scale(1.1);
+        }
+
+        /* Popup Message Styling */
+        .popup {
+            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 100;
+            animation: popupFadeIn 0.5s ease-out;
+        }
+
+        @keyframes popupFadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .pulseCake {
+                font-size: 40px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .glowBtn {
+                font-size: 16px;
+            }
+        }
+
+        /* Fireworks Canvas */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="hearts">
+        <span class="heart">&#10084;</span>
+        <span class="heart">&#10084;</span>
+        <span class="heart">&#10084;</span>
+    </div>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Birthday Message -->
+    <h1>Happy Birthday, Nishuu (Kanxi)! 💖</h1>
+
+    <!-- Rotating Cake with Candle -->
+    <div class="pulseCake">🎂 <span style="font-size: 25px;">🕯️</span></div>
+
+    <!-- Surprise Button -->
+    <button class="glowBtn" id="surpriseBtn"> Click Baby (Nishuu) </button>
+
+    <!-- Popup Messages -->
+    <div id="popup1" class="popup">Happy Birthday Dear Medam Jii !</div>
+    <div id="popup2" class="popup">May Your All Wishes Come True! 💕</div>
+    <div id="popup3" class="popup"> I'am Always with you like your Shawdo.</div>
+    <div id="popup4" class="popup"> My brave,Fantistic and Hard Working Girl Nishuuuuuuuuuuuu</div>
+
+    <!-- Audio for Music & Sound Effects -->
+    <audio id="heartbeatSound" src="heartbeat.mp3" preload="auto"></audio>
+    <audio id="birthdayMessage" src="birthdayMessage.mp3" preload="auto"></audio>
+
+    <script>
+        // Fireworks Effect
+        const canvas = document.getElementById("fireworksCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function drawFireworks() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const radius = Math.random() * 3 + 2;
+            const color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            setTimeout(drawFireworks, Math.random() * 1000);
+        }
+        drawFireworks();
+
+        // Popup Message Sequence
+        document.getElementById("surpriseBtn").addEventListener("click", function () {
+            document.getElementById("heartbeatSound").play();
+            document.getElementById("birthdayMessage").play();
+
+            let index = 0;
+            const popups = [document.getElementById("popup1"), document.getElementById("popup2"), document.getElementById("popup3"), document.getElementById("popup4")];
+
+            function showMessage() {
+                if (index < popups.length) {
+                    popups[index].style.display = "block";
+                    setTimeout(() => {
+                        popups[index].style.display = "none";
+                        index++;
+                        setTimeout(showMessage, 2000);
+                    }, 2000);
+                }
+            }
+
+            showMessage();
+        });
+    </script>
+</body>
+</html>
